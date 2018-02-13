@@ -9,6 +9,10 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+
+    let subjectRepo = SubjectRepository.shared
+    var subjects : [Subject]? = nil
+    var subjectSelect : Subject? = nil
     
     @IBOutlet weak var TblSubjects: UITableView!
     
@@ -20,22 +24,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         NSLog("We are being asked for indexPath \(indexPath)")
         let index = indexPath.row
-        let subject = subjects![index]
+        let subjectCell = subjects![index]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
-        cell.textLabel?.text = subject.title
-        cell.detailTextLabel?.text = subject.description
+        cell.textLabel?.text = subjectCell.title
+        cell.detailTextLabel?.text = subjectCell.description
         cell.imageView?.image = #imageLiteral(resourceName: "Marvel")
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let subject = subjects![indexPath.row]
-        NSLog("User selected row at \(subject.title)")
+        subjectSelect = subjects?[indexPath.row]
+        NSLog((subjectSelect?.title)!)
     }
-    
-    let subjectRepo = SubjectRepository.shared
-    var subjects : [Subject]? = nil
     
     @IBAction func settingsButton(_ sender: Any) {
         let alert = UIAlertController(title: "Settings", message: "Settings go here", preferredStyle: .alert)
@@ -59,7 +60,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "SVCSegue"?:
+            let indexPath = TblSubjects.indexPathForSelectedRow!
+            let source = segue.source as! ViewController
+            let destination = segue.destination as! QuestionView
+            destination.subject = source.subjects?[indexPath.row]
+            destination.index = 0
+        default:
+            NSLog("Unknown segue identifier -- " + segue.identifier!)
+        }
+    }
 
 }
 

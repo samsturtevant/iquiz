@@ -9,12 +9,18 @@
 import Foundation
 
 class Subject {
-    init(title : String, description : String) {
+    init(title : String, description : String, questions : [String], answers : [[String]], correct : [String]) {
         self.title = title
         self.description = description
+        self.questions = questions
+        self.answers = answers
+        self.correct = correct
     }
     var title = ""
     var description = ""
+    var questions : [String]
+    var answers : [[String]]
+    var correct : [String]
 }
 
 class SubjectRepository {
@@ -45,9 +51,9 @@ class SubjectRepository {
     }
     
     private let subjects : [Subject] = [
-        Subject(title: "Mathematics", description: "Numbers and stuff"),
-        Subject(title: "Science", description: "Chemicals and stuff"),
-        Subject(title: "Marvel Super Heroes", description: "Spider-Man and stuff"),
+        Subject(title: "Mathematics", description: "Numbers and stuff", questions: ["1 + 1 = ?", "2 + 2 = ?"], answers: [["1", "2", "3", "4"], ["2", "4", "6", "8"]], correct: ["2", "4"]),
+        Subject(title: "Science", description: "Chemicals and stuff", questions: ["What is H20?", "Why is Earth round?"], answers: [["Water", "Fire", "Earth", "Wind"], ["Gravity", "Magnets", "Equations", "Not Round"]], correct: ["Water", "Gravity"]),
+        Subject(title: "Marvel Super Heroes", description: "Spider-Man and stuff", questions: ["Peter Parker is...?", "Tony Stark is...?"], answers: [["Spider-Man", "Spooder-Dude", "Spidey-Boy", "Spaghett"], ["Iron Man", "Iran Man", "I ran, man", "IRA Man"]], correct: ["Spider-Man", "Iron Man"])
     ]
     
 }
