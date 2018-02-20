@@ -9,9 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
-    let filePath = "Library/:"
+    
     var json: [[String:Any]] = [[:]]
+    var url = URL(string: "http://tednewardsandbox.site44.com/questions.json")
     
     @IBOutlet weak var TblSubjects: UITableView!
     
@@ -38,20 +38,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         NSLog(((subject["title"])! as? String)!)
     }
     
-    @IBAction func settingsButton(_ sender: Any) {
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = URL(string: "http://tednewardsandbox.site44.com/questions.json")
         request(url: url!)
         
         // Do any additional setup after loading the view, typically from a nib.
         TblSubjects.dataSource = self
         TblSubjects.delegate = self
         self.TblSubjects.reloadData()
+        
+        let filePath = getDocumentsDirectory().appendingPathComponent("data.txt")
+        let fileString = filePath.absoluteString
+        
+        (json as NSArray).write(toFile: fileString, atomically: true)
+        self.TblSubjects.reloadData()
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
     }
     
     func request(url: URL) {

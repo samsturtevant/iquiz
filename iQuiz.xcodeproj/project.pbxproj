@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF40B6A5203BC95500E85129 /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF40B6A4203BC95500E85129 /* PopoverView.swift */; };
 		FF7CE9B720324510002E8545 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7CE9B620324510002E8545 /* QuestionView.swift */; };
 		FF9A6A312032547E00FA8750 /* AnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9A6A302032547E00FA8750 /* AnswerView.swift */; };
 		FFE0EB392030D57900A5256F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0EB382030D57900A5256F /* AppDelegate.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FF40B6A4203BC95500E85129 /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
 		FF7CE9B620324510002E8545 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		FF9A6A2420324C6600FA8750 /* iQuiz-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iQuiz-Bridging-Header.h"; sourceTree = "<group>"; };
 		FF9A6A302032547E00FA8750 /* AnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerView.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			children = (
 				FFE0EB382030D57900A5256F /* AppDelegate.swift */,
 				FFE0EB3A2030D57900A5256F /* ViewController.swift */,
+				FF40B6A4203BC95500E85129 /* PopoverView.swift */,
 				FFE0EB3C2030D57900A5256F /* Main.storyboard */,
 				FF7CE9B620324510002E8545 /* QuestionView.swift */,
 				FFE0EB3F2030D57900A5256F /* Assets.xcassets */,
@@ -274,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF40B6A5203BC95500E85129 /* PopoverView.swift in Sources */,
 				FF7CE9B720324510002E8545 /* QuestionView.swift in Sources */,
 				FFE0EB3B2030D57900A5256F /* ViewController.swift in Sources */,
 				FF9A6A312032547E00FA8750 /* AnswerView.swift in Sources */,

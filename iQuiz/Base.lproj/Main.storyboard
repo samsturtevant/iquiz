@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Popover View-->
         <scene sceneID="Vgk-L2-Zea">
             <objects>
-                <viewController id="Ge5-3u-Fdp" sceneMemberID="viewController">
+                <viewController id="Ge5-3u-Fdp" customClass="PopoverView" customModule="iQuiz" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="shI-cO-T0V">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,17 +27,20 @@
                                     <segue destination="BYZ-38-t0r" kind="show" identifier="PopoverSegue" id="6Ai-4T-PXt"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="URL to fetch" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rQv-SR-mqd">
-                                <rect key="frame" x="20" y="233" width="374" height="128"/>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter URL" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x1j-6F-l7O">
+                                <rect key="frame" x="20" y="274" width="374" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="gef-DH-PUo"/>
                     </view>
+                    <connections>
+                        <outlet property="textField" destination="x1j-6F-l7O" id="ogn-DW-TyC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IMA-XE-LJQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="gzL-kp-mfn" userLabel="Exit" sceneMemberID="exit"/>
@@ -94,8 +97,7 @@
                                 <items>
                                     <barButtonItem title="Settings" id="L3k-Ir-iO7">
                                         <connections>
-                                            <action selector="settingsButton:" destination="BYZ-38-t0r" id="Cky-La-otK"/>
-                                            <segue destination="Ge5-3u-Fdp" kind="popoverPresentation" identifier="PopoverSegue" popoverAnchorBarButtonItem="L3k-Ir-iO7" id="QhB-sh-6kx">
+                                            <segue destination="Ge5-3u-Fdp" kind="popoverPresentation" identifier="PopoverSegue" popoverAnchorBarButtonItem="L3k-Ir-iO7" id="ce3-Au-lTF">
                                                 <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                             </segue>
                                         </connections>
@@ -386,7 +388,7 @@
         <image name="Marvel" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="EIF-GF-9hq"/>
+        <segue reference="kdq-tU-Z0d"/>
         <segue reference="6Ai-4T-PXt"/>
     </inferredMetricsTieBreakers>
 </document>
