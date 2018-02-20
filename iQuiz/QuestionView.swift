@@ -12,7 +12,7 @@ class QuestionView: UIViewController {
     
     @IBOutlet weak var TblSubjects: UITableView!
     
-    var subject : Subject? = nil
+    var subject : [String : Any] = [:]
     var index = 0
     var correct = 0
     var answer = ""
@@ -28,11 +28,15 @@ class QuestionView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         submitButton.isEnabled = false
-        questionText.text = subject?.questions[index]
-        answerOne.setTitle(subject?.answers[index][0], for: .normal)
-        answerTwo.setTitle(subject?.answers[index][1], for: .normal)
-        answerThree.setTitle(subject?.answers[index][2], for: .normal)
-        answerFour.setTitle(subject?.answers[index][3], for: .normal)
+        let questions = subject["questions"] as? [Any]
+        let question = questions![index] as? [String : Any]
+        let answers = question!["answers"] as? [String]
+        questionText.text = question!["text"] as? String
+        answerOne.setTitle(answers?[0], for: .normal)
+        answerTwo.setTitle(answers?[1], for: .normal)
+        answerThree.setTitle(answers?[2], for: .normal)
+        answerFour.setTitle(answers?[3], for: .normal)
+        print(subject)
     }
     
     override func didReceiveMemoryWarning() {
@@ -41,22 +45,34 @@ class QuestionView: UIViewController {
     }
     
     @IBAction func onePressed(_ sender: Any) {
-        yourAnswer.text = subject?.answers[index][0]
+        let questions = subject["questions"] as? [Any]
+        let question = questions![index] as? [String : Any]
+        let answers = question!["answers"] as? [String]
+        yourAnswer.text = answers?[0]
         submitButton.isEnabled = true
     }
     
     @IBAction func twoPressed(_ sender: Any) {
-        yourAnswer.text = subject?.answers[index][1]
+        let questions = subject["questions"] as? [Any]
+        let question = questions![index] as? [String : Any]
+        let answers = question!["answers"] as? [String]
+        yourAnswer.text = answers?[1]
         submitButton.isEnabled = true
     }
     
     @IBAction func threePressed(_ sender: Any) {
-        yourAnswer.text = subject?.answers[index][2]
+        let questions = subject["questions"] as? [Any]
+        let question = questions![index] as? [String : Any]
+        let answers = question!["answers"] as? [String]
+        yourAnswer.text = answers?[2]
         submitButton.isEnabled = true
     }
     
     @IBAction func fourPressed(_ sender: Any) {
-        yourAnswer.text = subject?.answers[index][3]
+        let questions = subject["questions"] as? [Any]
+        let question = questions![index] as? [String : Any]
+        let answers = question!["answers"] as? [String]
+        yourAnswer.text = answers?[3]
         submitButton.isEnabled = true
     }
     
@@ -76,7 +92,11 @@ class QuestionView: UIViewController {
             let destination = segue.destination as! AnswerView
             destination.subject = source.subject
             destination.answer = source.answer
-            if yourAnswer.text == subject?.correct[index] {
+            let questions = subject["questions"] as? [[String : Any]]
+            let question = questions![index] as [String : Any]
+            let rightNumber = question["answer"]! as! String
+            let answers = question["answers"] as! [String]
+            if answer == answers[Int(rightNumber)! - 1] {
                 correct = correct + 1
             }
             index = index + 1

@@ -12,7 +12,7 @@ class AnswerView: UIViewController {
     
     @IBOutlet weak var TblSubjects: UITableView!
     
-    var subject : Subject? = nil
+    var subject : [String : Any] = [:]
     var index = 0
     var answer = ""
     var correct = 0
@@ -26,15 +26,20 @@ class AnswerView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        questionText.text = subject?.questions[index - 1]
+        let questions = subject["questions"] as? [[String : Any]]
+        let question = questions![index - 1] as [String : Any]
+        let rightNumber = question["answer"]! as! String
+        let answers = question["answers"] as! [String]
+        let correctAnswer = answers[Int(rightNumber)! - 1]
+        questionText.text = question["text"] as? String
         answerText.text = answer
-        correctText.text = subject?.correct[index - 1]
+        correctText.text = correctAnswer
         if answer == correctText.text {
             responseText.text = "Correct! :)"
         } else {
             responseText.text = "Incorrect... :("
         }
-        if index < (subject?.questions.count)! {
+        if index < (questions?.count)! {
             finishButton.isEnabled = false
             finishButton.alpha = 0
             nextButton.isEnabled = true

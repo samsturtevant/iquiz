@@ -12,7 +12,7 @@ class FinishView: UIViewController {
     
     @IBOutlet weak var TblSubjects: UITableView!
     
-    var subject : Subject? = nil
+    var subject : [String : Any] = [:]
     var index = 0
     var correct = 0
     

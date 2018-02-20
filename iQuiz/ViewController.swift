@@ -10,50 +10,62 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    let subjectRepo = SubjectRepository.shared
-    var subjects : [Subject]? = nil
-    var subjectSelect : Subject? = nil
+    let filePath = "Library/:"
+    var json: [[String:Any]] = [[:]]
     
     @IBOutlet weak var TblSubjects: UITableView!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         NSLog("numberOfRowsInSection called")
-        return subjects!.count;
+        return json.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         NSLog("We are being asked for indexPath \(indexPath)")
         let index = indexPath.row
-        let subjectCell = subjects![index]
+        let subjectCell = self.json[index] as [String:Any]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
-        cell.textLabel?.text = subjectCell.title
-        cell.detailTextLabel?.text = subjectCell.description
+        cell.textLabel?.text = subjectCell["title"] as? String
+        cell.detailTextLabel?.text = subjectCell["desc"] as? String
         cell.imageView?.image = #imageLiteral(resourceName: "Marvel")
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        subjectSelect = subjects?[indexPath.row]
-        NSLog((subjectSelect?.title)!)
+        let subject = json[indexPath.row] as [String : Any]
+        print(self.json[indexPath.row])
+        NSLog(((subject["title"])! as? String)!)
     }
     
     @IBAction func settingsButton(_ sender: Any) {
-        let alert = UIAlertController(title: "Settings", message: "Settings go here", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
-            NSLog("The \"OK\" alert occured.")
-        }))
-        self.present(alert, animated: true, completion: nil)
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        subjects = subjectRepo.getSubjects()
+        
+        let url = URL(string: "http://tednewardsandbox.site44.com/questions.json")
+        request(url: url!)
         
         // Do any additional setup after loading the view, typically from a nib.
         TblSubjects.dataSource = self
         TblSubjects.delegate = self
+        self.TblSubjects.reloadData()
+    }
+    
+    func request(url: URL) {
+        URLSession.shared.dataTask(with:url, completionHandler: {(data, response, error) in
+            guard let data = data, error == nil else { return }
+            
+            do {
+                let jsonData = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [[String:Any]]
+                self.json = jsonData
+                self.TblSubjects.reloadData()
+            } catch let error as NSError {
+                print(error)
+            }
+        }).resume()
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,12 +80,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let indexPath = TblSubjects.indexPathForSelectedRow!
             let source = segue.source as! ViewController
             let destination = segue.destination as! QuestionView
-            destination.subject = source.subjects?[indexPath.row]
+            destination.subject = source.json[indexPath.row]
             destination.index = 0
+        case "PopoverSegue"?: break
         default:
             NSLog("Unknown segue identifier -- " + segue.identifier!)
         }
     }
-
+    
+    
 }
+
+
 

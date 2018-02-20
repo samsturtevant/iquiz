@@ -11,6 +11,40 @@
     </dependencies>
     <scenes>
         <!--View Controller-->
+        <scene sceneID="Vgk-L2-Zea">
+            <objects>
+                <viewController id="Ge5-3u-Fdp" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="shI-cO-T0V">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GEl-Bo-IR6">
+                                <rect key="frame" x="183" y="377" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="FETCH"/>
+                                <connections>
+                                    <action selector="fetchButton:" destination="gzL-kp-mfn" eventType="touchUpInside" id="H5M-Bf-7Ad"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="PopoverSegue" id="6Ai-4T-PXt"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="URL to fetch" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="rQv-SR-mqd">
+                                <rect key="frame" x="20" y="233" width="374" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="gef-DH-PUo"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IMA-XE-LJQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="gzL-kp-mfn" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="-1000.0000000000001" y="136.95652173913044"/>
+        </scene>
+        <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="iQuiz" customModuleProvider="target" sceneMemberID="viewController">
@@ -61,6 +95,9 @@
                                     <barButtonItem title="Settings" id="L3k-Ir-iO7">
                                         <connections>
                                             <action selector="settingsButton:" destination="BYZ-38-t0r" id="Cky-La-otK"/>
+                                            <segue destination="Ge5-3u-Fdp" kind="popoverPresentation" identifier="PopoverSegue" popoverAnchorBarButtonItem="L3k-Ir-iO7" id="QhB-sh-6kx">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                            </segue>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -350,5 +387,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="EIF-GF-9hq"/>
+        <segue reference="6Ai-4T-PXt"/>
     </inferredMetricsTieBreakers>
 </document>
